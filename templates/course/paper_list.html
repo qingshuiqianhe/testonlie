@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+
+{% block sidebar %}
+    {% if request.user in teachers %}
+        <h2>通知</h2>
+            <ol>
+            {% for notice in notices %}
+                <li>发布人：{{ notice.pub_name.nick_name }}
+                内容：{{ notice}}
+                发布时间：{{ notice.pub_time }}</li>
+                {% endfor %}
+            </ol>
+        {% else %}
+        <h3>完成试卷</h3>
+            <div id="box1">
+            {% for paper in papers_done %}
+                {% for que in paper %}
+                <p>试卷名称：<a href="{% url 'paperview' que.paper_id %}">{{ que.paper.name}}    成绩:{{ que.total }}</a></p>
+                {% endfor %}
+            {% endfor %}
+            </div>
+    {% endif %}
+{% endblock sidebar %}
+
+
+{% block posts %}
+    {% if request.user in teachers %}
+        <div id="box1">
+        {% for i in papers %}
+            <p>试卷id:{{ i.id }}   试卷名称：<a href="{% url 'paperview' i.id %}">{{ i.course.name }}:{{ i.name }}</a></p>
+        {% endfor %}
+        </div>
+        {% else %}
+        <div id="box1">
+        {% for i in papers_not_done %}
+            <p>试卷id:{{ i.id }}   试卷名称：<a href="{% url 'paperview' i.id %}">{{ i.course.name }}:{{ i.name }}</a></p>
+        {% endfor %}
+        </div>
+    {% endif %}
+    <div>{{ msg }}</div>
+{% endblock posts %}
+
+{#    <div id="box1">#}
+{#    {% for paper in dong %}#}
+{#        <h3> 已完成试卷</h3>#}
+{#        {% for i in paper %}#}
+{#        <p>试卷id: 试卷名称：<a href="{% url 'paperview' i.id %}">{{ i}}</a></p>#}
+{#        {% endfor %}#}
+{#    {% endfor %}#}
+{#    </div>#}

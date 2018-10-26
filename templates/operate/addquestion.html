@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+
+
+<div id="main">
+    <!--posts-->
+    {% block posts %}
+
+    <form action="{% url 'addquestion' %}" method="post"  >
+        <div style="font-size: 25px; font-weight: bold;text-align: center;">
+            <p class="center-block">题库中题目操作</p>
+        </div>
+        {% csrf_token %}
+         <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">操作</span>
+                <select type="text" name="operate" class="form-control"  >
+                    <option value="add">增加</option>
+                    <option value="select">查找</option>
+                </select>
+        </div>
+         <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">课程id:</span>
+                <input type="text" name="course_id" class="form-control" placeholder="course_id" >
+        </div>
+         <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">问题类型：</span>
+                <select type="text" name="questionType" class="form-control"  >
+                    <option value="xz">选择</option>
+                    <option value="pd">判断</option>
+                    <option value="wd">问答</option>
+                </select>
+        </div>
+        <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">内容：</span>
+                <input type="text" name="context" class="form-control" placeholder="context" >
+        </div>
+         <div class="input-group" style="width: 350px;margin: 0 auto" >
+                <span class="input-group-addon" id="basic-addon1">答案：</span>
+                <input type="text" name="answer" class="form-control" placeholder="answer" >
+        </div>
+        <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">选项A：</span>
+                <input type="text" name="choice_a" class="form-control" placeholder="choice_a" >
+        </div>
+         <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">选项B：</span>
+                <input type="text" name="choice_b" class="form-control" placeholder="choice_b" >
+        </div>
+        <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">选项C：</span>
+                <input type="text" name="choice_c" class="form-control" placeholder="choice_c" >
+        </div>
+         <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">选项D：</span>
+                <input type="text" name="choice_d" class="form-control" placeholder="choice_d" >
+        </div>
+        <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">备注信息：</span>
+                <input type="text" name="note" class="form-control" placeholder="note" >
+        </div>
+        <div class="input-group"style="width: 350px;margin: 0 auto" >
+                <span class="input-group-addon" id="basic-addon1">正确</span>
+                <input type="text" name="boolt" class="form-control" placeholder="boolt" value="True">
+        </div>
+        <div class="input-group" style="width: 350px;margin: 0 auto">
+                <span class="input-group-addon" id="basic-addon1">错误</span>
+                <input type="text" name="boolf" class="form-control" placeholder="boolf" value="False">
+        </div>
+        <br>
+        <div style="width: 350px;margin: 0 auto">
+            <input type="submit" style="width:280px;" class="btn btn-default" value="执行操作"/>
+        </div>
+    {% endblock posts %}
+    </form>
+</div>
+

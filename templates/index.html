@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block sidebar %}
+    <h2>通知</h2>
+    <ol>
+    {% for notice in notices %}
+        <li>发布人：{{ notice.pub_name.nick_name }}
+        内容：{{ notice}}
+        发布时间：{{ notice.pub_time }}</li>
+        {% endfor %}
+    </ol>
+{% endblock sidebar %}
+
+{% block posts %}
+
+    <h2>试卷所有信息</h2>
+        {% for paper in paps %}
+{#            <h3>试卷{{ paper.paper_name_id}}信息???????</h3>#}
+           {% for pap in paper %}
+{#               <h3>试卷{{ pap.paper_name_id }}信息</h3>#}
+            <li>questions_id：{{ pap.id }}  选中次数：{{ pap.question.select_time }}-
+                题库原题目序号：{{ pap.question.id }}       试卷{{ pap.paper_name_id }}</li>
+            {% endfor %}
+        {% endfor %}
+{% endblock posts %}

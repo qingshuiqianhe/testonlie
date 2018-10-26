@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+{% block posts %}
+<body>
+<div>
+    {% for score in paper_score %}
+        <div>选择分数：{{ score.xuanze_score }}  判断分数：{{ score.panduan_score }}  简答分数：{{ score.jianda_score }}</div>
+    {% endfor %}
+</div>
+
+{{ msg }}
+<form method="post" id="test1">
+{% csrf_token %}
+    <ol>
+    {% if request.user in teachers %}
+        {% for student in students_test %}
+            {% if student.question.questionType == 'wd' %}
+                <div id="studen_answerinfo" >
+                    <li>学生：{{ student.user.nick_name }}-学生答案{{ student.answer }}-
+                        正确答案：{{ student.question.answer }}--学生分数{{ student.score }}
+                    <a href="{% url 'chang_answer_log' student.question_id student.user.id  student.paper_id student.course_id %}">修改本题分数</a></li>
+{#                        学生分数<input type="text"  name="score"  value="{{ student.score }}" />#}
+{#                        试卷id<input type="text"  name="paper_id"  value="{{ student.paper_id }}" readonly="readonly" />#}
+{#                        学生id<input type="text"  name="user_id"  value="{{ student.user.id }}" readonly="readonly" />#}
+{#                        问题id<input type="text"  name="question_id"  value="{{ student.question_id }}" readonly="readonly" />#}
+{#                        课程id<input type="text"  name="course_id"  value="{{ student.course_id }}" readonly="readonly" /></a>#}
+{#                      <input name="tijiao" type="submit" value="提交" />#}
+                </div>
+                {% else %}
+                <li>学生：{{ student.user.nick_name }}-学生答案{{ student.answer }}--正确答案：{{ student.question.answer }}</li>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <ol>
+            {% for question in user_answer_log %}
+                <li><h4>题目：{{ question.question.context}}--你的答案：{{ question.answer }}---正确答案：{{ question.question.answer }}</h4></li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+    </ol>
+{% csrf_token %}
+</form>
+</body>
+{% endblock posts %}

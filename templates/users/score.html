@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+{% block posts %}
+
+<body>
+
+{{ msg }}
+{{ score }}
+
+<ol>
+{% for student in students %}
+    <li>{{ student}}<a href="{% url 'score_paper' student.paper_id %}">详情</a></li>
+{% endfor %}
+
+</ol>
+<div id="box1">
+    {% for user in users %}
+        <p>{{ user }}   查看详情：<a href="{% url 'score_paper' user.paper_id %}">{{ user.paper}}</a></p>
+    {% endfor %}
+</div>
+
+</body>
+{% endblock posts %}

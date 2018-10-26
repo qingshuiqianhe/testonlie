@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+{% block posts %}
+    {{ msg }}
+<form method="post" action="">
+    {% csrf_token %}
+{#        {% for que in questions %}#}
+             <div class="input-group" >
+                <span class="input-group-addon" id="basic-addon1">id</span>
+                <input type="text" name="id" value="{{ question.id}}" readonly="readonly" style="width:580px;" >
+             </div>
+             <div class="input-group" >
+                <span class="input-group-addon" id="basic-addon1">context</span>
+                <input type="text" name="questionType" value="{{ question.questionType }}" readonly="readonly" style="width:580px;" >
+             </div>
+             <div class="input-group" >
+                <span class="input-group-addon" id="basic-addon1">context</span>
+                <input type="text" name="context" value="{{ question.context }}"  style="width:580px;" >
+             </div>
+             <div class="input-group" >
+                <span class="input-group-addon" id="basic-addon1">answer</span>
+                <input type="text" name="answer" value="{{ question.answer }}" style="width:580px;" >
+             </div>
+
+        <label><input name="operate" type="radio" value="delete"
+                      style="opacity:1;margin-right:1em;z-index: -1;width: 1em"/>delete</label>
+        <label><input name="operate" type="radio" value="change"
+                      style="opacity:1;margin-right:1em;z-index: -1;width: 1em"/>change</label><br/>
+        <input type="submit" style="width:280px;" class="btn btn-default"value="提交" />
+{#        {% endfor %}#}
+    </form>
+{% endblock posts %}
+
+
+

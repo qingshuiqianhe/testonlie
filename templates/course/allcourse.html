@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+{% block sidebar %}
+    <title>全部课程</title>
+    <ul>
+        {% for course in courseList %}
+            <li>id:{{ course.courseId }}----name:{{ course.name }}---desc:{{ course.desc }}</li>
+        {% endfor %}
+    </ul>
+{% endblock sidebar %}

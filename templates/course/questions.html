@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+<div id="main">
+    <!--posts-->
+    {% block posts %}
+<body>
+    <div>{{ msg }}</div>
+
+{#    <ul>#}
+{#        {% for question in questions %}#}
+{#            <li>id:<a href="{% url 'questions' question.id %}">{{ question.id }}</a>----name:{{ question.course.name }}-#}
+{#                -context:{{ question.context }}---{{ question.answer }}---{{ question.questionType }}</li>#}
+{#             <p>试题名称：<a href="{% url 'questions' question.id %}">{{ question.course.name }} </a></p>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+
+    <form method="get" action="{% url 'change_question' %}}">
+        <ol>
+        <li>id:{{ question.id }}---{{ question.questionType }}:{{ question.questionType }}---context:{{ question.context }}---answer:{{ questions.answer }}</li>
+        </ol>
+        <ol>
+        {% for question in questions %}
+            <li>试题:<a href="{% url 'questions' question.id %}">{{ question }}</a>
+                课程名: {{ question.course.name }}试题内容:{{ question.context }}
+                答案：{{ question.answer }}试题类型：{{ question.get_questionType_display }}</li>
+        {% endfor %}
+        </ol>
+    </form>
+
+
+</body>
+    {% endblock posts %}
+</div>

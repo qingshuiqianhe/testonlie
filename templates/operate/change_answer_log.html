@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+{% block posts %}
+
+<body>
+<form method="post" >
+    {% csrf_token %}
+    <div style="width: 350px;margin: 0 auto">
+        学生分数：<input type="text"  name="score"  value="{{ students.score }}" />
+        标准答案：<input type="text"  name="question_answer"  value="{{ students.question.answer }}" readonly="readonly" />
+        试卷号：<input type="text"  name="paper_id"  value="{{ students.paper_id }}" readonly="readonly" />
+        学生id：<input type="text"  name="user_id"  value="{{ students.user.id }}" readonly="readonly" />
+        问题序号：<input type="text"  name="question_id"  value="{{ students.question_id }}" readonly="readonly" />
+        课程序号：<input type="text"  name="course_id"  value="{{ students.course_id }}" readonly="readonly" /><br>
+       <input type="submit" value="修改" />
+    </div>
+</form>
+</body>
+{% endblock posts %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+{% block posts %}
+<body>
+{{ msg }}
+
+<form method="post" action="{% url 'paper_change_question' paper_id question.id %}">
+    {% csrf_token %}
+   <div>
+    <ol>
+    {% for question in questions %}
+        <li><a href="{% url 'paper_change_question' paper_id question.id %} ">{{ question }}</a>
+{#        <label>paper_id<input name="paper_id" type="text" value="{{ paper_id }}"/></label>#}
+    {% endfor %}
+    </ol>
+</div>
+</form>
+
+<h2>{{ title}}        {{ question_count }}</h2>
+<form action="" method="POST" id="form1" name="hhhhh">
+    {% csrf_token %}
+    {% if request.user in users %}
+        <form method="post"  name="AddPaperQuestion">
+        {% csrf_token %}
+            <ol>
+        {% for question_now in question %}
+            <div>
+            <li>
+                <form action="" method="POST" id="form2" name="delete_question">
+                    {% csrf_token %}
+                    <span >问题序号:
+                        <input name="question_id" value="{{ question_now.id }}"style="width: 45px" readonly="readonly"/>
+                    </span>
+                    <span>问题类型:
+                        <input name="questionType" value="{{ question_now.get_questionType_display }}"style="width: 40px" readonly="readonly"/>
+                    </span>
+                    <span>问题内容:
+                        <input name="question_context" value="{{ question_now.context }}"style="width: 230px" readonly="readonly"/>
+                    </span>
+                    <span>
+                        答案:
+                        <input name="question_answer" value="{{ question_now.answer }}" style="width: 200px" readonly="readonly"/>
+                    </span>
+                    <span>
+                        <input name="operate" type="radio" value="delete" />删除
+                        <input type="submit" value="删除" style="width: 60px;text-align: left" />
+                    </span>
+
+
+                </form>
+            </li>
+            </div>
+        {% endfor %}
+
+        <div class="input-group" style="width: 90px">
+            <label><input name="operate" type="radio" value="add"/>增加</label>
+            <br>
+            <span class="input-group-addon" id="basic-addon1">问题类型</span>
+            <select type="text" name="type_question" class="form-control"  >
+                <option value="xz">选择</option>
+                <option value="pd">判断</option>
+                <option value="wd">问答</option>
+            </select>
+
+        </div>
+{#                <label>paper_id<input name="paper_id" type="text" value="{{ paper_id }}"/></label>#}
+            <br>
+            <div style="margin: 0 auto">
+                <input type="submit" value="增加" />
+            </div>
+
+        </ol>
+        </form>
+    {% else %}
+    {% for question_now in question %}
+        <div id="box1">
+            {% if question_now.questionType == 'xz' %}
+            <from id="{{ question_now.id }}">
+                <p>{{ forloop.counter }}.({{ question_now.questionType }}) {{ question_now.context }}</p>
+                <input type="hidden" value="{{ question_now.id }}">
+                <input name="{{ question_now.id }}" type="radio" value="A"/>{{ question_now.choice_a }}
+                <br/>
+                <input name="{{ question_now.id }}" type="radio" value="B"/>{{ question_now.choice_b }}
+               <br/>
+                <input name="{{ question_now.id }}" type="radio" value="C"/>{{ question_now.choice_c }}
+                <br/>
+
+                <input name="{{ question_now.id }}" type="radio" value="D"/>{{ question_now.choice_d }}
+                <br/>
+            </from>
+            {% endif %}
+
+            {% if question_now.questionType == 'pd' %}
+            <from id="{{ question_now.id }}">
+
+                <p>{{ forloop.counter }}.({{ question_now.questionType }}) {{ question_now.context }}</p>
+                <input type="hidden" value="{{ question_now.id }}">
+
+                    <input name="{{ question_now.id }}" type="radio" value="True"/>{{ question_now.boolt }}
+                <br/>
+
+                    <input name="{{ question_now.id }}" type="radio" value="False"/>{{ question_now.boolf }}
+                <br/>
+            </from>
+            {% endif %}
+
+            {% if question_now.questionType == 'wd' %}
+            <from id="{{ question_now.id }}">
+                <p>{{ forloop.counter }}.({{ question_now.questionType }}) {{ question_now.context }}</p>
+                <input type="hidden" value="{{ question_now.id }}">
+
+                    <input name="{{ question_now.id }}" type="text" value="True"/>{{ question_now.note }}
+                <br/>
+            </from>
+            {% endif %}
+        </div>
+        <hr/>
+
+    {% endfor %}
+        <div id="box2"><input name="tijiao" type="submit" value="提交" onclick="submitForm()" /></div>
+ {% endif %}
+</form>
+</body>
+{% endblock posts %}

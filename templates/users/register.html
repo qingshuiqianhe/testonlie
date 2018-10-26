@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+{% block posts %}
+    <form action="{% url 'register' %}" method="post"  >
+        <div style="font-size: 25px; font-weight: bold;text-align: left;">
+            <p class="center-block">用户注册</p>
+        </div>
+        <div class="input-group" style="width: 400px" >
+                <span class="input-group-addon" id="basic-addon1">用户名</span>
+                <input type="text" id="name" name="username" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">
+        </div>
+
+        <!--下面是密码输入框-->
+         <div class="input-group"  style="width: 400px" >
+                <span class="input-group-addon" id="basic-addon1">密码</span>
+                <input  type="password" id="password" name="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1">
+         </div>
+        <!--下面是登陆按钮,包括颜色控制-->
+        <input type="submit" style="width:230px;" class="btn btn-default" value="注册并登录" />
+        <a href="{% url 'login' %}"  style="width: 280px;" class="btn btn-default">已有账号？</a>
+        <script language="javascript"> //JavaScript脚本标注
+            alert("{{ msg }}");
+        </script>
+    {% csrf_token %}
+    </form>
+{% endblock posts %}

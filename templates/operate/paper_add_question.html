@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+<div id="main">
+    <!--posts-->
+    {% block posts %}
+<body>
+
+<h3>{{ msg }}</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ question.id }}-{{ question.context }}--{{ question.answer }}
+     <input name="operate" type="radio" value="add"/>add</label>
+    question_id<input name="question_id" type="text" value="{{ question.id }} "readonly="readonly" style="width: 50px"/>
+{#    <label><input name="paper_id" type="text" value="{{ paper_id }}"/>paper_id</label>#}
+    <input type="submit" value="添加" />
+</form>
+</body>
+    {% endblock posts %}
+
+</div>

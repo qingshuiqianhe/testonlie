@@ -1,0 +1,133 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--css-->
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/github.css' %}">
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+                        <div ><a href="http://www.ncst.edu.cn/"><img style="height: 51px;" src="{% static 'images/lxy_logo.png'%}"/></a></div>
+						<h1><a href="http://127.0.0.1:8000/">在线考试系统</a></h1>
+						<nav class="links">
+                            {% if request.user.is_authenticated %}
+							<ul>
+{#                                <li><a href="{% url 'paperlists' %}">我的通知</a></li>#}
+								<li><a href="{% url 'paperlists' %}">试卷列表</a></li>
+                                <li><a href="{% url 'usercenter-info' %}">个人中心</a></li>
+                                <li><a href="{% url 'download' page_number %}">资料下载</a></li>
+                                {% if request.user in teachers %}
+                                    <li><a href="{% url 'addquestion' %}">题库管理</a></li>
+                                    <li><a href="{% url 'chouxuan' %}">增加试卷</a></li>
+                                {% endif %}
+
+{#                                 {% if perms.operate %}#}
+{#                                     <li>testt </li>#}
+{#                                     {% if perms.operate.Chouxuan %}#}
+{#                                         <li> chouxuan </li>#}
+{#                                     {% endif %}#}
+{#                                 {% endif %}#}
+                                <li><p>{{ user.username }}--{{ user.nick_name }}</p></li>
+							</ul>
+                            {% else %}
+                                <ul>
+                                    <li><a href="{% url 'login' %}">登陆</a></li>
+                                    <li><a href="{% url 'register' %}">注册</a></li>
+                                </ul>
+                            {% endif %}
+						</nav>
+						<nav class="main">
+							<ul>
+{#								<li class="search">#}
+{#									<a class="fa-search" href="#search">Search</a>#}
+{#									<form id="search" method="get" >#}
+{#                                        <li>action="{% url 'blog:search' %}</li>#}
+{#										<input type="text" name="q" placeholder="Search" />#}
+{#									</form>#}
+{#								</li>#}
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+				<!-- Menu -->
+					<section id="menu">
+						<!-- Search -->
+{#							<section>#}
+{#								<form class="search" method="get" action="#">#}
+{#									<input type="text" name="query" placeholder="Search" />#}
+{#								</form>#}
+{#							</section>#}
+						<!-- Links -->
+							<section>
+								<ul class="links">
+{#									<li>#}
+{#										<a href="#">#}
+{#											<h3>我的留言</h3>#}
+{#											<p>Feugiat tempus veroeros dolor</p>#}
+{#										</a>#}
+{#									</li>#}
+{#									<li>#}
+{#										<a href="#">#}
+{#											<h3>我的回复</h3>#}
+{#											<p>Sed vitae justo condimentum</p>#}
+{#										</a>#}
+{#									</li>#}
+									<li>
+										<a href="#">
+											<h3>成绩管理</h3>
+											<p><a href="{% url 'score' %}">我的成绩</a></p>
+										</a>
+									</li>
+{#									<li>#}
+{#										<a href="#">#}
+{#											<h3>Etiam sed consequat</h3>#}
+{#											<p>Porta lectus amet ultricies</p>#}
+{#										</a>#}
+{#									</li>#}
+								</ul>
+							</section>
+
+						<!-- Actions -->
+							<section>
+								<ul class="actions vertical">
+									<li><a href="{% url 'logout' %}" class="button big fit">退出</a></li>
+								</ul>
+							</section>
+					</section>
+                    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
+				<!-- Main -->
+					<div id="main">
+                        <!--posts-->
+                        {% block posts %}
+                        {% endblock posts %}
+					</div>
+                <!--section-->
+                    <section id="sidebar">
+                    <!--文章列表-->
+                        {% block sidebar %}
+                        {% endblock sidebar %}
+
+                    </section>
+			</div>
+{#            <div id="footer" style="width:500px;left: 500px" >#}
+{#                <div >#}
+{#                    <span >清水谦和 保留所有权利</span>#}
+{#                    <span >copyright &copy;  ICP备案证书号：</span>#}
+{#                </div>#}
+{#            </div>#}
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/skel.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+	</body>
+</html>

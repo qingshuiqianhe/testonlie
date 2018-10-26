@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset='utf8' />
+<title> {{ title }}</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font: 14px/1.4 Microsoft YaHei, SimSun, Arial;
+    }
+
+    .errorwarp {
+        padding-top: 100px;
+        text-align: center;
+    }
+
+    p {
+        line-height: 94px;
+        font-size: 18px;
+        color: #14191e;
+    }
+
+    a {
+        font-size: 18px;
+        color: #f01414;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-decoration: none;
+    }
+
+    .feedback {
+        font-size: 14px;
+        margin-top: 38px;
+    }
+</style>
+</head>
+<body>
+
+<div class='errorwarp'>
+    <img src='{% static 'images/pic404.png'%}' />
+    <p>Sorry，找不到你想要的页面</p>
+    <a href='{% url '/' %}' id='jsreferrer'>返回首页</a>
+    <a href='{% url '/' %}' class='feedback'>向我们反馈错误</a>
+</div>
+
+</body>
+</html>

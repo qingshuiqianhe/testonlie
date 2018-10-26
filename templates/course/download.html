@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<title>{{ title }}</title>
+
+{% block posts %}
+    <form method="post" >
+    <div id="box1">
+    {% for file in file_list %}
+        <p><a href="{{ MEDIA_URL }}{{ file.file_content }}" id="file{{ file.pk }}"
+              onclick="addNum({{ file.pk }})">{{ forloop.counter }}. {{ file.file_name }}</a></p>
+        <p> 发布时间:{{ file.add_time }}</p>
+    {% endfor %}
+    </div>
+    </form>
+    <body>
+
+    <form action="{% url 'downadd' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="fileUpload" src="{% static 'file' %}"/>
+        <input type="submit" value="上传文件" />
+    </form>
+
+</body>
+{% endblock posts %}
+
+
